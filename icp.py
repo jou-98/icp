@@ -5,6 +5,7 @@ from utils import *
 import time
 from sklearn.neighbors import NearestNeighbors as NN
 from numpy.linalg import norm as pnorm
+from numpy.random import default_rng
 
 def correspondence_search(x,y):
     nbrs = NN(n_neighbors=1, algorithm='kd_tree').fit(y)
@@ -60,9 +61,6 @@ def icp(x, y, max_iter=100, threshold=0.3):
     # TODO: change to a better downsampling method
     
     dim = x.shape[1]
-    max_points = min(x.shape[0],y.shape[0])
-    y = y[:max_points,:]
-    x = x[:max_points,:]
 
     src = np.ones((dim+1,x.shape[0]))
     dst = np.ones((dim+1,y.shape[0]))
@@ -77,7 +75,7 @@ def icp(x, y, max_iter=100, threshold=0.3):
 
     time_search = 0
     time_matrix = 0
-    
+    metric = 0
 
     while True:
         i += 1
@@ -91,8 +89,10 @@ def icp(x, y, max_iter=100, threshold=0.3):
         #print(f'shape of R is {R.shape} and shape of x is {x.shape}')
         src = np.dot(T, src)
         error = np.mean(dist)
-        print(f'Iteration {i}: error = {error}')
+        if i % 20 == 0:
+            print(f'Iteration {i}: error = {error.round(5)}')
         if np.abs(error-prev_error) <= threshold or i == max_iter:
+            metric = cRMS(src[:dim,idx].T, dst[:dim,idx].T)
             break 
         prev_error = error
     start = time.time()
@@ -100,27 +100,37 @@ def icp(x, y, max_iter=100, threshold=0.3):
     time_matrix += time.time() - start 
     print(f'Time taken to find corresponding points: {round(time_search,3)}s')
     print(f'Time taken to find transformation matrix: {round(time_matrix,3)}s')
+    print(f'Total time taken: {round(time_search+time_matrix,3)}')
+    print(f'cRMS = {metric}')
     return T, dist, i
-
-
 
 
 
 if __name__ == "__main__":
     pcd1 = o3d.io.read_point_cloud('bunny/data/bun000.ply',format='ply')
-    pcd2 = o3d.io.read_point_cloud('bunny/data/bun270.ply',format='ply')
+    pcd2 = o3d.io.read_point_cloud('bunny/data/bun045.ply',format='ply')
     pts1 = np.asarray(pcd1.points)
     pts2 = np.asarray(pcd2.points)
-    max_points = min(pts1.shape[0],pts2.shape[0])
-    pts1 = pts1[:max_points,:]
-    pts2 = pts2[:max_points,:]
+    min_points = min(pts1.shape[0],pts2.shape[0])
+    max_points = max(pts1.shape[0],pts2.shape[0])
     pcd1.points = o3d.utility.Vector3dVector(pts1)
     pcd2.points = o3d.utility.Vector3dVector(pts2)
+    if max_points != min_points:
+        pts1, pts2 = sampling(pts1,pts2,max_points,min_points,method='default')
+    """
+    rng = default_rng()
+    idx = rng.choice(max_points,size=min_points,replace=False)
+    if pts1.shape[0] >= pts2.shape[0]: pts1 = pts1[idx,:]
+    if pts1.shape[0] < pts2.shape[0]: pts2 = pts2[idx,:]
+    #pts1 = pts1
+    #pts2 = pts2[idx,:]
+    """
     #print(f'Shape of pts1 is {pts1.shape}; Shape of pts2 is {pts2.shape}')
-    T, dist, i = icp(pts1, pts2, max_iter=30, threshold=0.00001)
-    print(T)
-    print(np.mean(dist))
+    T, dist, i = icp(pts1, pts2, max_iter=1000, threshold=0.000001)
+    #print(T)
+    #print(np.mean(dist))
     print(f'Done in {i} iterations')
-    draw_registration_result(pcd1, pcd2, T)
+
+    draw_registration_result(pcd1, pcd2, T, filename='000_045.ply')
     
 

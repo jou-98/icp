@@ -1,15 +1,39 @@
 import numpy as np
 import open3d as o3d
+import random
 import copy
+from numpy.random import default_rng
 
 BIN_DIR = './bin/'
 LABELs_DIR = './labels/'
 
-CLASSES = {0:"unlabeled", 1 : "outlier", 11: "bicycle", 15: "motorcycle",\
-        30: "person", 31: "bicyclist", 32: "motorcyclist", 40: "road",\
-        44: "parking", 48: "sidewalk", 49: "other-ground",80: "pole",\
-        81: "traffic-sign"}
+def sampling(arr1,arr2,max_points,min_points,method='default'):
+    pts1 = copy.deepcopy(arr1)
+    pts2 = copy.deepcopy(arr2)
+    if method == 'default':
+        pts1 = pts1[:min_points,:] if pts1.shape[0] >= pts2.shape[0] else pts1
+        pts2 = pts2[:min_points,:] if pts2.shape[0] > pts1.shape[0] else pts2
+        return pts1,pts2
+    if method == 'farthest_point':
+        pass
+    if method == 'np_rand':
+        rng = default_rng()
+        idx = rng.choice(max_points,size=min_points,replace=False)
+    elif method == 'py_rand':
+        idx = random.sample(range(max_points),min_points)
+    if pts1.shape[0] > pts2.shape[0]: pts1 = pts1[idx,:]
+    if pts1.shape[0] < pts2.shape[0]: pts2 = pts2[idx,:]
+    return pts1, pts2
 
+
+
+
+# Computes the coordinate Root-Mean-Squared error between the two
+# point clouds.
+def cRMS(src, dst):
+    diff = src-dst
+    root_squared = np.apply_along_axis(lambda x:x[0]**2+x[1]**2+x[2]**2 ,axis=1,arr=diff)
+    return np.mean(root_squared)
 
 
 def render_color(pc,label,ply_path='./00_001000_colored.ply'):
@@ -52,19 +76,6 @@ def read_label(path='./labels/00_000143.label',dim=2):
     #print(np.unique(labels,return_counts=True))
     return labels
 
-# Merges point array and label array
-# Possible to use either combination of seq# and frame# (e.g. seq=00, frame=000143)
-# or individual paths
-def get_pc_and_label(use_seq_frame=True,seq='00',frame='000143',\
-    bin_path=None,label_path=None):
-    if use_seq_frame:
-        bin_path = BIN_DIR+seq+'_'+frame+'.bin'
-        label_path = LABEL_DIR+seq+'_'+frame+'.label'
-    pts = read_pc(path=bin_path,save_ply=False)
-    labels = read_label(path=label_path)
-    labels = labels.reshape((-1,1))
-    ret = np.concatenate((pts,labels),axis=1)
-    return ret 
 
 # Renders a point cloud in black and white, reads either bin file or ply file 
 def jitter_point_cloud(batch_data, sigma=0.01, clip=0.05):
@@ -82,7 +93,7 @@ def jitter_point_cloud(batch_data, sigma=0.01, clip=0.05):
 
 # Draws the result of transformation matrix. Takes two open3d point clouds
 # as input, not arrays
-def draw_registration_result(source, target, transformation):
+def draw_registration_result(source, target, transformation, filename='a+b.ply'):
     source_temp = copy.deepcopy(source)
     target_temp = copy.deepcopy(target)
     source_temp.paint_uniform_color([1, 0.706, 0])
@@ -94,10 +105,11 @@ def draw_registration_result(source, target, transformation):
     pcd = o3d.geometry.PointCloud()
     pcd.points = o3d.utility.Vector3dVector(pts)
     pcd.colors = o3d.utility.Vector3dVector(rgb)
-    o3d.io.write_point_cloud('a+b.ply', pcd)
-    
+    o3d.io.write_point_cloud(filename, pcd)
+    """
     o3d.visualization.draw_geometries([source_temp, target_temp],
                                       zoom=0.4459,
                                       front=[0.9288, -0.2951, -0.2242],
                                       lookat=[1.6784, 2.0612, 1.4451],
                                       up=[-0.3402, -0.9189, -0.1996])
+    """
