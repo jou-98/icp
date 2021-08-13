@@ -130,3 +130,5 @@ dmypy.json
 
 # Actual data files
 *.ply
+*.conf
+*.conf~

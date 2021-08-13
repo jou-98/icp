@@ -1,0 +1,542 @@
+==================== Testing 000.ply against 045.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.092 sec.
+
+Rotation angle between source and target is 34.281
+RE = 0.697, TE = 0.103
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against 090.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.812 sec.
+
+Rotation angle between source and target is 90.178
+RE = 105.297, TE = 0.021
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against 180.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.994 sec.
+
+Rotation angle between source and target is 179.898
+RE = 10.631, TE = 0.07
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against 270.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.873 sec.
+
+Rotation angle between source and target is 89.985
+RE = 41.905, TE = 0.075
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against 315.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.036 sec.
+
+Rotation angle between source and target is 45.209
+RE = 2.151, TE = 0.026
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against chin.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.023 sec.
+
+Rotation angle between source and target is 58.661
+RE = 164.371, TE = 0.172
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against ear_back.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.798 sec.
+
+Rotation angle between source and target is 146.264
+RE = 29.158, TE = 0.152
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.842 sec.
+
+Rotation angle between source and target is 134.945
+RE = 162.585, TE = 0.165
+============================== End of evaluation ==============================
+
+
+==================== Testing 000.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.727 sec.
+
+Rotation angle between source and target is 146.435
+RE = 7.567, TE = 0.069
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against 090.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.730 sec.
+
+Rotation angle between source and target is 55.911
+RE = 70.743, TE = 0.109
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against 180.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.855 sec.
+
+Rotation angle between source and target is 145.83
+RE = 31.808, TE = 0.066
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against 270.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.823 sec.
+
+Rotation angle between source and target is 124.256
+RE = 49.364, TE = 0.123
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against 315.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.940 sec.
+
+Rotation angle between source and target is 79.465
+RE = 4.367, TE = 0.083
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against chin.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.811 sec.
+
+Rotation angle between source and target is 79.676
+RE = 120.948, TE = 0.273
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against ear_back.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.714 sec.
+
+Rotation angle between source and target is 113.461
+RE = 54.847, TE = 0.137
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.792 sec.
+
+Rotation angle between source and target is 134.428
+RE = 43.941, TE = 0.084
+============================== End of evaluation ==============================
+
+
+==================== Testing 045.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.681 sec.
+
+Rotation angle between source and target is 123.183
+RE = 4.836, TE = 0.058
+============================== End of evaluation ==============================
+
+
+==================== Testing 090.ply against 180.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.706 sec.
+
+Rotation angle between source and target is 89.925
+RE = 124.011, TE = 0.068
+============================== End of evaluation ==============================
+
+
+==================== Testing 090.ply against 270.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.638 sec.
+
+Rotation angle between source and target is 179.838
+RE = 158.941, TE = 0.085
+============================== End of evaluation ==============================
+
+
+==================== Testing 090.ply against 315.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.780 sec.
+
+Rotation angle between source and target is 135.374
+RE = 110.718, TE = 0.067
+============================== End of evaluation ==============================
+
+
+==================== Testing 090.ply against chin.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.727 sec.
+
+Rotation angle between source and target is 124.65
+RE = 168.901, TE = 0.218
+============================== End of evaluation ==============================
+
+
+==================== Testing 090.ply against ear_back.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.651 sec.
+
+Rotation angle between source and target is 61.248
+RE = 59.596, TE = 0.134
+============================== End of evaluation ==============================
+
+
+==================== Testing 090.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.750 sec.
+
+Rotation angle between source and target is 143.731
+RE = 1.139, TE = 0.154
+============================== End of evaluation ==============================
+
+
+==================== Testing 090.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.905 sec.
+
+Rotation angle between source and target is 94.586
+RE = 173.431, TE = 0.092
+============================== End of evaluation ==============================
+
+
+==================== Testing 180.ply against 270.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.138 sec.
+
+Rotation angle between source and target is 89.914
+RE = 107.812, TE = 0.05
+============================== End of evaluation ==============================
+
+
+==================== Testing 180.ply against 315.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.438 sec.
+
+Rotation angle between source and target is 134.707
+RE = 158.264, TE = 0.075
+============================== End of evaluation ==============================
+
+
+==================== Testing 180.ply against chin.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.066 sec.
+
+Rotation angle between source and target is 155.193
+RE = 123.835, TE = 0.218
+============================== End of evaluation ==============================
+
+
+==================== Testing 180.ply against ear_back.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.045 sec.
+
+Rotation angle between source and target is 44.51
+RE = 0.405, TE = 0.069
+============================== End of evaluation ==============================
+
+
+==================== Testing 180.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.044 sec.
+
+Rotation angle between source and target is 173.254
+RE = 2.229, TE = 0.158
+============================== End of evaluation ==============================
+
+
+==================== Testing 180.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.827 sec.
+
+Rotation angle between source and target is 96.011
+RE = 43.905, TE = 0.132
+============================== End of evaluation ==============================
+
+
+==================== Testing 270.ply against 315.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.871 sec.
+
+Rotation angle between source and target is 44.798
+RE = 55.387, TE = 0.112
+============================== End of evaluation ==============================
+
+
+==================== Testing 270.ply against chin.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.779 sec.
+
+Rotation angle between source and target is 79.836
+RE = 126.243, TE = 0.295
+============================== End of evaluation ==============================
+
+
+==================== Testing 270.ply against ear_back.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.884 sec.
+
+Rotation angle between source and target is 126.509
+RE = 53.71, TE = 0.098
+============================== End of evaluation ==============================
+
+
+==================== Testing 270.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.166 sec.
+
+Rotation angle between source and target is 153.34
+RE = 153.054, TE = 0.144
+============================== End of evaluation ==============================
+
+
+==================== Testing 270.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.873 sec.
+
+Rotation angle between source and target is 148.959
+RE = 41.508, TE = 0.182
+============================== End of evaluation ==============================
+
+
+==================== Testing 315.ply against chin.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.128 sec.
+
+Rotation angle between source and target is 55.582
+RE = 150.479, TE = 0.114
+============================== End of evaluation ==============================
+
+
+==================== Testing 315.ply against ear_back.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.260 sec.
+
+Rotation angle between source and target is 169.627
+RE = 177.636, TE = 0.168
+============================== End of evaluation ==============================
+
+
+==================== Testing 315.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.119 sec.
+
+Rotation angle between source and target is 140.931
+RE = 165.346, TE = 0.191
+============================== End of evaluation ==============================
+
+
+==================== Testing 315.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.741 sec.
+
+Rotation angle between source and target is 178.243
+RE = 38.179, TE = 0.065
+============================== End of evaluation ==============================
+
+
+==================== Testing chin.ply against ear_back.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.763 sec.
+
+Rotation angle between source and target is 167.77
+RE = 175.653, TE = 0.264
+============================== End of evaluation ==============================
+
+
+==================== Testing chin.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.084 sec.
+
+Rotation angle between source and target is 171.066
+RE = 173.402, TE = 0.045
+============================== End of evaluation ==============================
+
+
+==================== Testing chin.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 1.056 sec.
+
+Rotation angle between source and target is 165.007
+RE = 174.127, TE = 0.096
+============================== End of evaluation ==============================
+
+
+==================== Testing ear_back.ply against top2.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.848 sec.
+
+Rotation angle between source and target is 169.025
+RE = 2.663, TE = 0.099
+============================== End of evaluation ==============================
+
+
+==================== Testing ear_back.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.733 sec.
+
+Rotation angle between source and target is 111.273
+RE = 50.641, TE = 0.324
+============================== End of evaluation ==============================
+
+
+==================== Testing top2.ply against top3.ply ====================
+:: Load two point clouds and disturb initial pose.
+:: Downsample with a voxel size 0.001.
+:: Downsample with a voxel size 0.001.
+:: Apply fast global registration with distance threshold 0.001
+Fast global registration took 0.721 sec.
+
+Rotation angle between source and target is 178.769
+RE = 6.536, TE = 0.365
+============================== End of evaluation ==============================
+
+
+Recall rate is 24.44
+Average time to compute each pair is 2.267s
