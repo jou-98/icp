@@ -4,7 +4,7 @@ from utils import *
 from time import time
 from Logger import Logger 
 from numpy.linalg import norm as pnorm
-from metadata import *
+
 
 
 def prepare_dataset(src,dst,voxel_size):
@@ -62,14 +62,12 @@ def calc_one_fgr(file1,file2,voxel_size=0.001,which='bunny',logger=None):
         suffix = 'happy_side/data/'
         f1 = file1[15:]
         f2 = file2[15:]
-    elif which == 'happy_back':
-        suffix = 'happy_back/data/'
-        f1 = file1[15:]
-        f2 = file2[15:]
     print(f'==================== Testing {f1}.ply against {f2}.ply ====================')
 
     
     source, target, source_down, target_down, source_fpfh, target_fpfh = prepare_dataset(suffix+file1+'.ply',suffix+file2+'.ply',voxel_size)
+    
+    """
     start = time()
     result_fast = execute_fast_global_registration(source_down, target_down,
                                                 source_fpfh, target_fpfh,
@@ -95,26 +93,46 @@ def calc_one_fgr(file1,file2,voxel_size=0.001,which='bunny',logger=None):
     logger.record_reGT(reGT)
     logger.record_te(TE)
 
-    #draw_registration_result(source, target, filename=which+'/baseline_fgr/'+f1+'_'+f2+'_orig.ply')
+    draw_registration_result(source, target, filename=which+'/baseline_fgr/'+f1+'_'+f2+'_orig.ply')
     draw_registration_result(source, target, T,filename=which+'/baseline_fgr/'+f1+'_'+f2+'.ply')
     print(f'============================== End of evaluation ==============================\n\n')
     logger.increment()
     return logger
 
-
+"""
 if __name__=='__main__':
     voxel_size = 0.001
 
+    dataset = ['bunny','happy_stand','happy_side']
+
+    bunny_files =   ['bun000','bun045','bun090','bun180','bun270',
+                    'bun315','chin','ear_back','top2','top3']
+    stand_files =   ['happyStandRight_0','happyStandRight_24',
+                    'happyStandRight_48','happyStandRight_72',
+                    'happyStandRight_96','happyStandRight_120',
+                    'happyStandRight_144','happyStandRight_168',
+                    'happyStandRight_192','happyStandRight_216',
+                    'happyStandRight_240','happyStandRight_264',
+                    'happyStandRight_288','happyStandRight_312',
+                    'happyStandRight_336']
+    side_files =   ['happySideRight_0','happySideRight_24',
+                    'happySideRight_48','happySideRight_72',
+                    'happySideRight_96','happySideRight_120',
+                    'happySideRight_144','happySideRight_168',
+                    'happySideRight_192','happySideRight_216',
+                    'happySideRight_240','happySideRight_264',
+                    'happySideRight_288','happySideRight_312',
+                    'happySideRight_336']
     RE_list = []
     TE_list = []
     t_list = []
     log = Logger()
-    which = dataset[0]
+    which = dataset[2]
 
     if which == 'bunny':
         for i in range(len(bunny_files)):
             for j in range(len(bunny_files)):
-                if i != j:
+                if i < j:
                     log = calc_one_fgr(bunny_files[i],bunny_files[j],voxel_size=voxel_size,which='bunny',logger=log)
     elif which == 'happy_stand':
         for i in range(len(stand_files)):
@@ -133,6 +151,5 @@ if __name__=='__main__':
     #print(f'Average time to downsample the point cloud is {round(log.avg_sampling(),3)}')
     #print(f'Average time to find correspondence is {round(log.avg_nn(),3)}s')
     #print(f'Average time to compute transformation matrix is {round(log.avg_mat(),3)}s')
-
-
+    
 

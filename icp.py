@@ -8,6 +8,7 @@ from numpy.random import default_rng
 from sampling import *
 from Logger import Logger
 from matplotlib import pyplot as plt
+from metadata import *
 
 
 def correspondence_search(x,y,nbrs=None):
@@ -107,6 +108,14 @@ def calc_one_icp(file1, file2, logger=None, which='bunny'):
         suffix = 'happy_stand/data/'
         f1 = file1[16:]
         f2 = file2[16:]
+    elif which == 'happy_side':
+        suffix = 'happy_side/data/'
+        f1 = file1[15:]
+        f2 = file2[15:]
+    elif which == 'happy_back':
+        suffix = 'happy_back/data/'
+        f1 = file1[15:]
+        f2 = file2[15:]
     print(f'==================== Testing {f1} against {f2} ====================')
 
     
@@ -119,16 +128,18 @@ def calc_one_icp(file1, file2, logger=None, which='bunny'):
     pcd1.points = o3d.utility.Vector3dVector(pts1)
     pcd2.points = o3d.utility.Vector3dVector(pts2)
     start = time()
-    if max_points != min_points:
-        pts1, pts2 = downsample(pts1,pts2,max_points,min_points,method='fps') # Changed from np_rand
-    
+    if pts1.shape[0] != pts2.shape[0]:
+        pts1, pts2 = downsample(pts1,pts2,method='fps') # Changed from np_rand
+    print(f'Shape of pts1 is {pts1.shape}')
+    print(f'Shape of pts2 is {pts2.shape}')
+
     time_sample = time() - start
     print(f'Time taken to downsample the point cloud: {round(time_sample,3)}s')
     logger.record_sampling(time_sample)
     #print(f'Shape of pts1 is {pts1.shape}; Shape of pts2 is {pts2.shape}')
     T, dist, i, logger = icp(pts1, pts2, max_iter=200, threshold=0.00001,logger=logger)
     print(f'Done in {i} iterations')
-
+    print(T)
     confdir = get_conf_dir(name=which)
     tx1,ty1,tz1,qx1,qy1,qz1,qw1 = get_quat(confdir,file1)
     tx2,ty2,tz2,qx2,qy2,qz2,qw2 = get_quat(confdir,file2)
@@ -153,33 +164,35 @@ def calc_one_icp(file1, file2, logger=None, which='bunny'):
     return logger
 
 if __name__ == "__main__":
-    bunny_files =   ['bun000','bun045','bun090','bun180','bun270',
-                    'bun315','chin','ear_back','top2','top3']
-    stand_files =   ['happyStandRight_0','happyStandRight_24',
-                    'happyStandRight_48','happyStandRight_72',
-                    'happyStandRight_96','happyStandRight_120',
-                    'happyStandRight_144','happyStandRight_168',
-                    'happyStandRight_192','happyStandRight_216',
-                    'happyStandRight_240','happyStandRight_264',
-                    'happyStandRight_288','happyStandRight_312',
-                    'happyStandRight_336']
+
     RE_list = []
     TE_list = []
     t_list = []
     log = Logger()
     
-    for i in range(len(bunny_files)):
-        for j in range(len(bunny_files)):
-            if i < j:
-                log = calc_one_icp(bunny_files[i],bunny_files[j],log,which='bunny')
+    which = dataset[0]
+    if which == dataset[0]:
+        for i in range(len(bunny_files)):
+            for j in range(len(bunny_files)):
+                if i < j:
+                    log = calc_one_icp(bunny_files[i],bunny_files[j],log,which='bunny')
+    elif which == dataset[1]:
+        for i in range(len(stand_files)):
+            for j in range(len(stand_files)):
+                if i != j and np.abs(j - i) < 4:
+                    log = calc_one_icp(stand_files[i],stand_files[j],log,which='happy_stand')
+    elif which == dataset[2]:
+        for i in range(len(side_files)):
+            for j in range(len(side_files)):
+                if j > i:
+                    log = calc_one_icp(side_files[i],side_files[j],log,which='happy_side')
+    elif which == dataset[3]:
+        for i in range(len(side_files)):
+            for j in range(len(side_files)):
+                if j > i:
+                    log = calc_one_icp(back_files[i],back_files[j],log,which='happy_back')
+        
     """
-    
-    for i in range(len(stand_files)):
-        for j in range(len(stand_files)):
-            if j > i:
-                log = calc_one_icp(stand_files[i],stand_files[j],log,which='happy_stand')
-    
-    
     plt.scatter(log.reGT,log.re)
     print(f'reGT={log.reGT}; re={log.re}')
     plt.ylabel('Rotation Error')
@@ -191,6 +204,7 @@ if __name__ == "__main__":
     plt.legend()
     plt.savefig('re_reGT_stand')
     """
+    print(f'In total, {log.count} pairs of point clouds are evaluated.')
     print(f'Recall rate is {round(log.recall(),2)}')
     print(f'Average time to compute each pair is {round(log.avg_all(),3)}s')
     print(f'Average time to downsample the point cloud is {round(log.avg_sampling(),3)}')

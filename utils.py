@@ -12,6 +12,8 @@ LABELs_DIR = './labels/'
 def get_conf_dir(name='bunny'):
     if name == 'bunny': return 'bunny/data/bun.conf'
     if name == 'happy_stand': return 'happy_stand/data/happyStandRight.conf'
+    if name == 'happy_side': return 'happy_side/data/happySideRight.conf'
+    if name == 'happy_back': return 'happy_back/data/happyBackRight.conf'
 
 def get_quat(dir,fname):
     buf = []
@@ -126,7 +128,7 @@ def draw_registration_result(source, target, transformation=None, filename='a+b.
     source_temp.paint_uniform_color([1, 0.706, 0])
     target_temp.paint_uniform_color([0, 0.651, 0.929])
 
-    if transformation is not None: source_temp = source_temp.transform(transformation)
+    if transformation is not None: source_temp=source_temp.transform(transformation)
 
     rgb = np.concatenate((np.asarray(source_temp.colors),np.asarray(target_temp.colors)),axis=0)
     pts = np.concatenate((np.asarray(source_temp.points),np.asarray(target_temp.points)),axis=0)
@@ -172,4 +174,6 @@ def mat_to_quat(mat):
 
 
 def rotation_error(p1,p2,p3,p4,q1,q2,q3,q4):
-    return np.rad2deg(2*np.arccos(np.abs(p1*q1 + p2*q2 + p3*q3 + p4*q4)))
+    cos = np.abs(p1*q1 + p2*q2 + p3*q3 + p4*q4)
+    if cos > 1 and cos < 1.001: cos=1.00
+    return np.rad2deg(2*np.arccos(cos))
