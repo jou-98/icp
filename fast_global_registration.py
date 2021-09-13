@@ -96,7 +96,7 @@ def calc_one_fgr(file1,file2,voxel_size=0.001,which='bunny',logger=None):
     logger.record_te(TE)
 
     #draw_registration_result(source, target, filename=which+'/baseline_fgr/'+f1+'_'+f2+'_orig.ply')
-    draw_registration_result(source, target, T,filename=which+'/baseline_fgr/'+f1+'_'+f2+'.ply')
+    #draw_registration_result(source, target, T,filename=which+'/baseline_fgr/'+f1+'_'+f2+'.ply')
     print(f'============================== End of evaluation ==============================\n\n')
     logger.increment()
     return logger
@@ -109,7 +109,7 @@ if __name__=='__main__':
     TE_list = []
     t_list = []
     log = Logger()
-    which = dataset[0]
+    which = dataset[3]
 
     if which == 'bunny':
         for i in range(len(bunny_files)):
@@ -119,14 +119,20 @@ if __name__=='__main__':
     elif which == 'happy_stand':
         for i in range(len(stand_files)):
             for j in range(len(stand_files)):
-                if j > i:
+                if j != i and np.abs(j-i)<4:
                     log = calc_one_fgr(stand_files[i],stand_files[j],voxel_size=voxel_size,which='happy_stand',logger=log)
     elif which == 'happy_side':
-        for i in range(len(stand_files)):
-            for j in range(len(stand_files)):
-                if j > i:
+        for i in range(len(side_files)):
+            for j in range(len(side_files)):
+                if j != i and np.abs(j-i)<4:
                     log = calc_one_fgr(side_files[i],side_files[j],voxel_size=voxel_size,which='happy_side',logger=log)
+    elif which == 'happy_back':
+        for i in range(len(back_files)):
+            for j in range(len(back_files)):
+                if j != i and np.abs(j-i)<4:
+                    log = calc_one_fgr(back_files[i],back_files[j],voxel_size=voxel_size,which='happy_back',logger=log)
     
+    print(f'Results for fast global registration algorithm on {which} dataset.')
     print(f'In total, {log.count} pairs of point clouds are evaluated.')
     print(f'Recall rate is {round(log.recall(),2)}')
     print(f'Average time to compute each pair is {round(log.avg_meta(),3)}s')

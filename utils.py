@@ -79,9 +79,12 @@ def o3d_instance(pts,rgb=None):
     if rgb is not None: pcd.colors = o3d.utility.Vector3dVector(rgb)
     return pcd
 
-def o3d_save_pc(pts,path,colors=None):
-    pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(pts)
+def o3d_save_pc(pts,path,colors=None,pcd_format=False):
+    if pcd_format:
+        pcd = pts
+    else:
+        pcd = o3d.geometry.PointCloud()
+        pcd.points = o3d.utility.Vector3dVector(pts)
     if colors is not None: pcd.colors = o3d.utility.Vector3dVector(colors)
     o3d.io.write_point_cloud(path, pcd)
 
@@ -136,13 +139,6 @@ def draw_registration_result(source, target, transformation=None, filename='a+b.
     pcd.points = o3d.utility.Vector3dVector(pts)
     pcd.colors = o3d.utility.Vector3dVector(rgb)
     o3d.io.write_point_cloud(filename, pcd)
-    """
-    o3d.visualization.draw_geometries([source_temp, target_temp],
-                                      zoom=0.4459,
-                                      front=[0.9288, -0.2951, -0.2242],
-                                      lookat=[1.6784, 2.0612, 1.4451],
-                                      up=[-0.3402, -0.9189, -0.1996])
-    """
 
 
 def quat_to_mat(tx,ty,tz,qx,qy,qz,qw):

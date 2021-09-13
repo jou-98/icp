@@ -115,7 +115,7 @@ def calc_one_ransac(file1,file2,voxel_size=0.001,which='bunny',logger=None):
     logger.record_te(TE)
 
     #draw_registration_result(source, target, filename=which+'/baseline_ransac/'+f1+'_'+f2+'_orig.ply')
-    draw_registration_result(source, target, T,filename=which+'/baseline_ransac/'+f1+'_'+f2+'.ply')
+    #draw_registration_result(source, target, T,filename=which+'/baseline_ransac/'+f1+'_'+f2+'.ply')
     print(f'============================== End of evaluation ==============================\n\n')
     logger.increment()
     return logger
@@ -127,36 +127,33 @@ if __name__=='__main__':
     TE_list = []
     t_list = []
     log = Logger()
-    which = dataset[0]
+    which = dataset[3]
 
-    if which == 'bunny':
+    if which == dataset[0]:
         for i in range(len(bunny_files)):
             for j in range(len(bunny_files)):
                 if i != j:
                     log = calc_one_ransac(bunny_files[i],bunny_files[j],voxel_size=voxel_size,which='bunny',logger=log)
-    elif which == 'happy_stand':
+    elif which == dataset[1]:
         for i in range(len(stand_files)):
             for j in range(len(stand_files)):
-                if j > i:
+                if np.abs(j-i) < 4 and j != i:
                     log = calc_one_ransac(stand_files[i],stand_files[j],voxel_size=voxel_size,which='happy_stand',logger=log)
-    elif which == 'happy_side':
-        for i in range(len(stand_files)):
-            for j in range(len(stand_files)):
-                if j > i:
-                    log = calc_one_ransac(side_files[i],side_files[j],voxel_size=voxel_size,which='happy_side',logger=log)
-    elif which == dataset[3]:
+    elif which == dataset[2]:
         for i in range(len(side_files)):
             for j in range(len(side_files)):
-                if j > i:
-                    log = calc_one_ransac(back_files[i],back_files[j],log,which='happy_back')
+                if np.abs(j-i) < 4 and j != i:
+                    log = calc_one_ransac(side_files[i],side_files[j],voxel_size=voxel_size,which='happy_side',logger=log)
+    elif which == dataset[3]:
+        for i in range(len(back_files)):
+            for j in range(len(back_files)):
+                if np.abs(j-i) < 4 and j != i:
+                    log = calc_one_ransac(back_files[i],back_files[j],voxel_size=voxel_size,which='happy_back',logger=log)
 
-
+    print(f'Results for RANSAC algorithm on {which} dataset.')
     print(f'In total, {log.count} pairs of point clouds are evaluated.')
     print(f'Recall rate is {round(log.recall(),2)}')
     print(f'Average time to compute each pair is {round(log.avg_meta(),3)}s')
-    #print(f'Average time to downsample the point cloud is {round(log.avg_sampling(),3)}')
-    #print(f'Average time to find correspondence is {round(log.avg_nn(),3)}s')
-    #print(f'Average time to compute transformation matrix is {round(log.avg_mat(),3)}s')
 
 
 

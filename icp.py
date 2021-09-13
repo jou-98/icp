@@ -128,8 +128,7 @@ def calc_one_icp(file1, file2, logger=None, which='bunny'):
     pcd1.points = o3d.utility.Vector3dVector(pts1)
     pcd2.points = o3d.utility.Vector3dVector(pts2)
     start = time()
-    if pts1.shape[0] != pts2.shape[0]:
-        pts1, pts2 = downsample(pts1,pts2,method='fps') # Changed from np_rand
+    pts1, pts2 = downsample(pts1,pts2,method='fps',n_fps=0.3) # Changed from np_rand
     print(f'Shape of pts1 is {pts1.shape}')
     print(f'Shape of pts2 is {pts2.shape}')
 
@@ -157,7 +156,7 @@ def calc_one_icp(file1, file2, logger=None, which='bunny'):
     logger.record_reGT(reGT)
     logger.record_te(TE)
     #draw_registration_result(pcd1, pcd2, t2, filename=file1+'_'+file2+'ex.ply')
-    draw_registration_result(pcd1, pcd2, transformation=None, filename=which+'/baseline_vanilla/'+f1+'_'+f2+'_orig.ply')
+    #draw_registration_result(pcd1, pcd2, transformation=None, filename=which+'/baseline_vanilla/'+f1+'_'+f2+'_orig.ply')
     draw_registration_result(pcd1, pcd2, T, filename=which+'/baseline_vanilla/'+f1+'_'+f2+'.ply')
     print(f'============================== End of evaluation ==============================\n\n')
     logger.increment()
@@ -170,40 +169,29 @@ if __name__ == "__main__":
     t_list = []
     log = Logger()
     
-    which = dataset[0]
+    which = dataset[1]
     if which == dataset[0]:
         for i in range(len(bunny_files)):
             for j in range(len(bunny_files)):
-                if i < j:
+                if i != j:
                     log = calc_one_icp(bunny_files[i],bunny_files[j],log,which='bunny')
     elif which == dataset[1]:
         for i in range(len(stand_files)):
             for j in range(len(stand_files)):
-                if i != j and np.abs(j - i) < 4:
+                if np.abs(i - j) < 4 and i != j:
                     log = calc_one_icp(stand_files[i],stand_files[j],log,which='happy_stand')
     elif which == dataset[2]:
         for i in range(len(side_files)):
             for j in range(len(side_files)):
-                if j > i:
+                if np.abs(i - j) < 4 and i != j:
                     log = calc_one_icp(side_files[i],side_files[j],log,which='happy_side')
     elif which == dataset[3]:
-        for i in range(len(side_files)):
-            for j in range(len(side_files)):
-                if j > i:
+        for i in range(len(back_files)):
+            for j in range(len(back_files)):
+                if np.abs(i - j) < 4 and i != j:
                     log = calc_one_icp(back_files[i],back_files[j],log,which='happy_back')
         
-    """
-    plt.scatter(log.reGT,log.re)
-    print(f'reGT={log.reGT}; re={log.re}')
-    plt.ylabel('Rotation Error')
-    plt.xlabel('Initial Difference')
-    plt.title('Initial angle vs. RE for Standing Buddha')
-    plt.xlim([0,190])
-    plt.ylim([0,190])
-    plt.axhline(y=15)
-    plt.legend()
-    plt.savefig('re_reGT_stand')
-    """
+    print(f'Results for (mostly) unmodified ICP algorithm on {which} dataset.')
     print(f'In total, {log.count} pairs of point clouds are evaluated.')
     print(f'Recall rate is {round(log.recall(),2)}')
     print(f'Average time to compute each pair is {round(log.avg_all(),3)}s')

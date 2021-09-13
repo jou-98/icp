@@ -128,9 +128,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Actual data files
+# data files irrelevant to implementation
 *.ply
 *.conf
 *.conf~
 *.DS_Store
 __pycache__/*
+*.txt
