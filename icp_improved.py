@@ -2,6 +2,7 @@ import numpy as np
 import open3d as o3d 
 from utils import * 
 from metadata import *
+import argparse
 from sampling import downsample
 from sklearn.neighbors import NearestNeighbors as NN
 from scipy.optimize import linear_sum_assignment as LSA
@@ -280,13 +281,20 @@ def calc_one_pair(file1,file2,voxel_size,radius,which='bunny',log=None,init_thre
 
 
 if __name__=='__main__':
-    voxel_size = 0.002
-    r = 0.08
     RE_list = []
     TE_list = []
     t_list = []
     log = Logger()
-    which = dataset[3]
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', type=str, default='bunny', help='dataset to compare')
+    parser.add_argument('--radius', type=float, default=0.08, help='radius for NN search')
+    parser.add_argument('--voxel_size', type=float, default=0.002, help='size of each voxel')
+    FLAGS = parser.parse_args()
+
+    which = FLAGS.dataset
+    voxel_size = FLAGS.voxel_size 
+    r = FLAGS.radius
 
     if which == dataset[0]:
         for i in range(len(bunny_files)):

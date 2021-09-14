@@ -3,6 +3,7 @@ import open3d as o3d
 from time import time
 from Logger import Logger
 from utils import * 
+import argparse
 from numpy.linalg import norm as pnorm
 from metadata import *
 
@@ -121,13 +122,18 @@ def calc_one_ransac(file1,file2,voxel_size=0.001,which='bunny',logger=None):
     return logger
 
 if __name__=='__main__':
-    voxel_size = 0.001
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', type=str, default='bunny', help='dataset to compare')
+    parser.add_argument('--voxel_size', type=float, default=0.001, help='size of each voxel')
+    FLAGS = parser.parse_args()
+
+    voxel_size = FLAGS.voxel_size
+    which = FLAGS.dataset
 
     RE_list = []
     TE_list = []
     t_list = []
     log = Logger()
-    which = dataset[3]
 
     if which == dataset[0]:
         for i in range(len(bunny_files)):

@@ -1,6 +1,7 @@
 import open3d as o3d
 import numpy as np
 import copy
+import argparse
 from utils import *
 from time import time
 from sklearn.neighbors import NearestNeighbors as NN
@@ -164,12 +165,18 @@ def calc_one_icp(file1, file2, logger=None, which='bunny'):
 
 if __name__ == "__main__":
 
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', type=str, default='bunny', help='dataset to compare')
+    FLAGS = parser.parse_args()
+
     RE_list = []
     TE_list = []
     t_list = []
     log = Logger()
     
-    which = dataset[1]
+    which = FLAGS.dataset
+
     if which == dataset[0]:
         for i in range(len(bunny_files)):
             for j in range(len(bunny_files)):

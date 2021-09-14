@@ -2,6 +2,7 @@ import open3d as o3d
 import numpy as np
 from utils import *
 from time import time
+import argparse
 from Logger import Logger 
 from numpy.linalg import norm as pnorm
 from metadata import *
@@ -103,13 +104,19 @@ def calc_one_fgr(file1,file2,voxel_size=0.001,which='bunny',logger=None):
 
 
 if __name__=='__main__':
-    voxel_size = 0.001
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--dataset', type=str, default='bunny', help='dataset to compare')
+    parser.add_argument('--voxel_size', type=float, default=0.001, help='size of each voxel')
+    FLAGS = parser.parse_args()
+
 
     RE_list = []
     TE_list = []
     t_list = []
     log = Logger()
-    which = dataset[3]
+
+    voxel_size = FLAGS.voxel_size
+    which = FLAGS.dataset
 
     if which == 'bunny':
         for i in range(len(bunny_files)):
